@@ -18,10 +18,30 @@ function CaseStudiesPage() {
         <div className="section-head">
           <div>
             <p className="section-kicker">Case studies</p>
-            <h2 className="page-title">Project narratives shaped for STAR storytelling.</h2>
+            <h2 className="page-title">Project delivery stories framed around situation, task, action, and result.</h2>
           </div>
-          <p className="page-lead">Route scaffold is live and already consuming backend collection endpoint.</p>
+          <p className="page-lead">Backend-driven portfolio highlights focused on system design, decision making, and measurable outcomes.</p>
         </div>
+
+        {!loading && !error && data.length > 0 ? (
+          <div className="summary-grid">
+            <article className="stat-card">
+              <p className="small-label">Projects loaded</p>
+              <p className="metric-value">{data.length}</p>
+              <p className="card-copy">Case studies hydrate from the FastAPI collection endpoint.</p>
+            </article>
+            <article className="stat-card">
+              <p className="small-label">Latest delivery</p>
+              <p className="metric-value">{formatMonth(data[0].date)}</p>
+              <p className="card-copy">Newest work stays pinned first via backend date ordering.</p>
+            </article>
+            <article className="stat-card">
+              <p className="small-label">Core domains</p>
+              <p className="metric-value">{countUniqueTools(data)}</p>
+              <p className="card-copy">Distinct tools surfaced across API, data, infra, and visualization work.</p>
+            </article>
+          </div>
+        ) : null}
 
         {loading ? <StatusMessage title="Loading case studies" copy="Fetching project cards." /> : null}
         {error ? <StatusMessage title="Case studies unavailable" copy={error} error /> : null}
@@ -38,11 +58,14 @@ function CaseStudiesPage() {
                   <h3 className="card-title">{item.title}</h3>
                   <p className="card-copy">{item.summary}</p>
                   <div className="divider" />
-                  <ul className="inline-list">
-                    <li>Situation: {item.problem_statement ?? 'Placeholder content pending.'}</li>
-                    <li>Action: {item.architecture ?? 'Architecture details pending.'}</li>
-                    <li>Result: {item.impact ?? 'Impact statement pending.'}</li>
-                  </ul>
+                  <div className="star-list">
+                    {buildStarItems(item).map((entry) => (
+                      <div key={entry.label} className="star-item">
+                        <p className="star-label">{entry.label}</p>
+                        <p className="card-copy">{entry.copy}</p>
+                      </div>
+                    ))}
+                  </div>
                   <div className="chip-row">
                     {item.tech_stack.map((tool) => (
                       <span key={tool} className="chip">
@@ -83,3 +106,34 @@ function formatDate(value) {
 }
 
 export default CaseStudiesPage
+
+function buildStarItems(item) {
+  return [
+    {
+      label: 'Situation',
+      copy: item.problem_statement ?? 'Portfolio problem statement will be added with live project context.',
+    },
+    {
+      label: 'Task',
+      copy: item.summary,
+    },
+    {
+      label: 'Action',
+      copy: item.architecture ?? 'Architecture notes will be expanded with implementation detail.',
+    },
+    {
+      label: 'Result',
+      copy: item.impact ?? 'Impact details will be expanded with quantified delivery outcomes.',
+    },
+  ]
+}
+
+function countUniqueTools(items) {
+  return new Set(items.flatMap((item) => item.tech_stack)).size
+}
+
+function formatMonth(value) {
+  return new Intl.DateTimeFormat('en-US', {
+    month: 'short',
+  }).format(new Date(value))
+}

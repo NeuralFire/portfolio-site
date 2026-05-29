@@ -1,5 +1,6 @@
 import { useCallback } from 'react'
 import { Link } from 'react-router-dom'
+import DashboardMetricsChart from '../components/DashboardMetricsChart.jsx'
 import { useApi } from '../hooks/useApi.js'
 
 function HomePage() {
@@ -27,11 +28,11 @@ function HomePage() {
     <div className="page-stack">
       <section className="hero-panel">
         <div className="hero-copy">
-          <span className="section-kicker">Phase 4 completeable surface</span>
-          <h2 className="hero-title">Routing and API plumbing for portfolio views.</h2>
+          <span className="section-kicker">Phase 5 dashboard surface</span>
+          <h2 className="hero-title">Interactive portfolio telemetry, rendered with D3.</h2>
           <p className="hero-body">
-            Frontend shell now exposes stable routes, shared layout, and reusable request state so later D3, blog,
-            and case-study work can land without rewiring navigation.
+            Landing page now binds FastAPI metrics into an interactive multi-line chart with responsive scaling,
+            hover detail, and zoom controls to show product and data engineering signals over time.
           </p>
           <div className="hero-actions">
             <Link className="button-link" to="/case-studies">
@@ -56,13 +57,17 @@ function HomePage() {
         </aside>
       </section>
 
+      <section className="surface-panel dashboard-panel">
+        <DashboardMetricsChart series={data.series} generatedAt={data.generated_at} />
+      </section>
+
       <section className="surface-panel">
         <div className="section-head">
           <div>
             <p className="section-kicker">Metric snapshot</p>
-            <h3 className="section-title">Dashboard-ready summary cards</h3>
+            <h3 className="section-title">Dashboard context cards</h3>
           </div>
-          <p className="page-lead">Uses shared `useApi` hook and current backend aggregate payload.</p>
+          <p className="page-lead">Shared request state plus backend aggregates keep chart legend and KPI panels aligned.</p>
         </div>
 
         <div className="summary-grid">
