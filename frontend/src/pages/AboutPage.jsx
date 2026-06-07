@@ -1,41 +1,41 @@
 const narrativeSections = [
   {
     label: 'Professional narrative',
-    title: 'Data systems background with product delivery discipline',
+    title: 'Data science, data engineering, and AI applications built for delivery',
     copy:
-      'Work centers on turning noisy operational workflows into products teams can trust: reliable ingestion, measurable APIs, and interfaces that expose the right decision signal without extra ceremony.',
+      'My recent work centers on building production-minded data systems: analytics APIs, ETL workflows, SQL-backed platforms, machine learning pipelines, and applied AI tools that solve operational problems instead of stopping at experimentation.',
   },
   {
-    label: 'Technical transition',
-    title: 'From analytics execution to full-stack ownership',
+    label: 'Career positioning',
+    title: 'From domain-heavy research environments to broadly useful data and ML systems',
     copy:
-      'Earlier work emphasized modeling, ETL design, and stakeholder-facing analytics. The next layer was owning the service contracts, frontend routes, and deployment mechanics needed to ship complete systems end to end.',
+      'A Ph.D. and years of scientific work built strong habits around data quality, experimentation, and ambiguity. The core value now is translating those skills into scalable software, reliable data models, and AI-enabled applications for business and product teams.',
   },
   {
     label: 'Engineering philosophy',
-    title: 'Bias toward maintainable systems over clever demos',
+    title: 'Build systems that are measurable, maintainable, and useful to decision-makers',
     copy:
-      'Prefer clear seams, strong defaults, and simple observability. Good software makes future edits cheaper, handoffs safer, and troubleshooting local instead of mysterious.',
+      'I prioritize clean interfaces, reliable ingestion boundaries, automated validation, and clear output layers so teams can trust the data, understand the system, and extend it without rebuilding from scratch.',
   },
 ]
 
 const principles = [
-  'Design APIs around consumer workflows, not database tables.',
-  'Keep state boundaries explicit so frontend and backend failures stay diagnosable.',
-  'Document intent with structure: naming, schema contracts, and small components.',
-  'Treat delivery quality as product quality: performance, resilience, and clarity count.',
+  'Start with the data contract: schema clarity reduces downstream model and reporting issues.',
+  'Automate validation early so bad inputs fail before they spread through the pipeline.',
+  'Connect models to usable workflows, not isolated notebooks or one-off experiments.',
+  'Keep delivery grounded in measurable outcomes, maintainability, and stakeholder needs.',
 ]
 
 function AboutPage() {
   return (
     <div className="page-stack">
-      <section className="surface-panel">
+      <section className="surface-panel animate-fade-in-up">
         <div className="section-head">
           <div>
             <p className="section-kicker">About</p>
-            <h2 className="page-title">Systems-minded engineer bridging data, software delivery, and product thinking.</h2>
+            <h1 className="page-title">Technical lead focused on data platforms, analytics systems, and applied AI delivery.</h1>
           </div>
-          <p className="page-lead">This page carries the professional story behind the portfolio: how technical depth, cross-functional communication, and shipping discipline fit together.</p>
+          <p className="page-lead">This page frames the portfolio for teams hiring into data science, data engineering, ML engineering, and AI application roles.</p>
         </div>
 
         <div className="resume-grid">
@@ -51,10 +51,9 @@ function AboutPage() {
         <div className="content-grid">
           <article className="surface-subpanel">
             <p className="small-label">Operating style</p>
-            <h3 className="card-title">Work backward from business pressure, then simplify implementation</h3>
+            <h3 className="card-title">Work backward from business constraints, data realities, and end-user needs</h3>
             <p className="surface-copy">
-              Best delivery starts by isolating what needs to change for users or operators, then shaping data models,
-              contracts, and UI states around that outcome. That keeps architecture honest and reduces waste in the build.
+              The pattern is consistent across projects: understand the raw data and operational bottleneck first, then shape the storage model, processing logic, API surface, and model workflow around what users actually need to do.
             </p>
           </article>
           <article className="surface-subpanel">

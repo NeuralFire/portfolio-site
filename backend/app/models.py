@@ -1,4 +1,4 @@
-from datetime import datetime, date
+from datetime import datetime, date, timezone
 from sqlalchemy import (
     Column, Integer, String, Text, Date, DateTime,
     Float, ForeignKey, JSON
@@ -18,8 +18,11 @@ class CaseStudy(Base):
     architecture = Column(Text)
     impact = Column(Text)
     tech_stack = Column(JSON, nullable=False, default=list)
+    external_links = Column(JSON)
+    impact_metric = Column(JSON)
+    visualization = Column(JSON)
     date = Column(Date, nullable=False)
-    created_at = Column(DateTime, default=datetime.utcnow)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
 
 
 class BlogPost(Base):
@@ -30,7 +33,7 @@ class BlogPost(Base):
     content = Column(Text, nullable=False)
     publish_date = Column(Date, nullable=False)
     tags = Column(JSON, nullable=False, default=list)
-    created_at = Column(DateTime, default=datetime.utcnow)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
 
 
 class Metric(Base):
@@ -77,3 +80,14 @@ class GraphEdge(Base):
 
     source = relationship("GraphNode", foreign_keys=[source_id], back_populates="edges_out")
     target = relationship("GraphNode", foreign_keys=[target_id], back_populates="edges_in")
+
+
+class ContactSubmission(Base):
+    __tablename__ = "contact_submissions"
+
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String(120), nullable=False)
+    email = Column(String(255), nullable=False, index=True)
+    subject = Column(String(160))
+    message = Column(Text, nullable=False)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc), nullable=False)

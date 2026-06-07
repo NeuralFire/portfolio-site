@@ -7,7 +7,7 @@ const links = [
   },
   {
     label: 'LinkedIn',
-    href: 'https://www.linkedin.com',
+    href: 'https://www.linkedin.com/in/daniel-palmer-39306a85',
     note: 'Professional profile, recommendations, and recent work.',
     category: 'Career',
   },

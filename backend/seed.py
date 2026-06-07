@@ -30,30 +30,93 @@ def seed_database():
         print("\nSeeding CaseStudy records...")
         case_studies = [
             CaseStudy(
-                title="Real-Time ETL Pipeline with Apache Kafka",
-                summary="Built a scalable event streaming infrastructure processing 1M+ events daily",
-                problem_statement="Legacy batch processing was unable to handle real-time analytics requirements",
-                architecture="Kafka → Spark Streaming → PostgreSQL, with Redis caching for hot data",
-                impact="Reduced data latency from 6 hours to <2 minutes; 40% infrastructure cost savings",
-                tech_stack=["Kafka", "Apache Spark", "PostgreSQL", "Redis", "Python"],
+                title="MouseBytes v2 Analytics Platform",
+                summary="Architected a next-generation time series processing platform with React, FastAPI, and PostgreSQL to support on-demand metrics and flexible metadata.",
+                problem_statement="Large, high-dimensional time series datasets were difficult to reuse because analysis logic and metadata structures were too rigid for evolving research and reporting needs.",
+                architecture="React frontend → FastAPI service layer → PostgreSQL storage → on-demand metric generation and flexible metadata handling.",
+                impact="Created a stronger foundation for reusable analytics workflows, richer metadata, and faster access to derived metrics across complex datasets.",
+                tech_stack=["React", "FastAPI", "Python", "PostgreSQL", "SQL"],
+                external_links=[
+                    {
+                        "label": "Portfolio Repository",
+                        "url": "https://github.com"
+                    }
+                ],
+                impact_metric={
+                    "label": "Platform focus",
+                    "value": "On-demand metrics",
+                    "detail": "The platform was designed to support dynamic metric calculation and more flexible dataset reuse instead of fixed reporting outputs."
+                },
+                visualization={
+                    "title": "Analytics platform maturity",
+                    "subtitle": "Illustrative progression from raw ingestion to reusable metric delivery.",
+                    "x": ["Raw Data", "Structured Storage", "Metadata Layer", "On-Demand Metrics"],
+                    "y_axis_label": "Capability Score",
+                    "series": [
+                        {"name": "Data usability", "values": [1, 2, 4, 5]},
+                        {"name": "Analytical flexibility", "values": [1, 2, 3, 5]}
+                    ]
+                },
                 date=(datetime.utcnow() - timedelta(days=120)).date()
             ),
             CaseStudy(
-                title="ML Model Serving at Scale with FastAPI",
-                summary="Deployed scikit-learn models via REST API with 99.9% uptime SLA",
-                problem_statement="Manual model serving caused bottlenecks; needed async, scalable inference",
-                architecture="FastAPI application with Gunicorn workers, Docker containerization, K8s orchestration",
-                impact="Served 10K+ predictions/day; reduced inference latency by 60%",
-                tech_stack=["FastAPI", "scikit-learn", "Docker", "Kubernetes", "Python"],
+                title="Historical Scientific Data Migration",
+                summary="Engineered a Python ETL pipeline to migrate 15 years of historical data from hundreds of distributed Access databases into structured outputs.",
+                problem_statement="Legacy records were fragmented across many Access databases with inconsistent metadata, making migration and validation slow, manual, and error-prone.",
+                architecture="Distributed Access sources → Python ETL workflows → fuzzy matching and metadata alignment → validation outputs for downstream SQL migration.",
+                impact="Improved integrity and portability for long-lived datasets by automating extraction, alignment, and validation steps that would otherwise require significant manual review.",
+                tech_stack=["Python", "ETL", "SQL", "Data Validation", "Fuzzy Matching"],
+                external_links=[
+                    {
+                        "label": "Portfolio Repository",
+                        "url": "https://github.com"
+                    }
+                ],
+                impact_metric={
+                    "label": "Data horizon",
+                    "value": "15 years",
+                    "detail": "The migration covered long-lived historical records stored across hundreds of fragmented data sources."
+                },
+                visualization={
+                    "title": "Migration pipeline stages",
+                    "subtitle": "Illustrative workflow from fragmented legacy inputs to validated outputs.",
+                    "x": ["Extract", "Normalize", "Fuzzy Match", "Validate"],
+                    "y_axis_label": "Workflow Coverage",
+                    "series": [
+                        {"name": "Automation", "values": [2, 3, 4, 5]},
+                        {"name": "Data confidence", "values": [1, 2, 4, 5]}
+                    ]
+                },
                 date=(datetime.utcnow() - timedelta(days=80)).date()
             ),
             CaseStudy(
-                title="PostgreSQL Query Optimization for Analytics",
-                summary="Optimized slow analytics queries through indexing and partitioning strategies",
-                problem_statement="Dashboard queries taking 45+ seconds, affecting business intelligence workflows",
-                architecture="Composite indexes on fact tables, time-based partitioning, query plan analysis",
-                impact="Reduced query time 80% (45s → 9s); enabled real-time dashboard updates",
-                tech_stack=["PostgreSQL", "SQL", "Python", "Apache Superset"],
+                title="OpenBehaviourCamera Edge AI Application",
+                summary="Built Rust binaries and Python control software for Raspberry Pi Zero 2 devices that capture synchronized footage and support live YOLO inference.",
+                problem_statement="The system needed lightweight edge capture, synchronized hardware-state logging, and practical AI-assisted tracking on constrained hardware.",
+                architecture="Rust capture binaries on Raspberry Pi Zero 2 → Python orchestration and recording workflows → live YOLO inference for behavioral tracking.",
+                impact="Combined edge systems work and applied computer vision into a deployable AI application that supports automation, recording, and live analysis.",
+                tech_stack=["Rust", "Python", "YOLO", "Raspberry Pi", "Computer Vision"],
+                external_links=[
+                    {
+                        "label": "Portfolio Repository",
+                        "url": "https://github.com"
+                    }
+                ],
+                impact_metric={
+                    "label": "Deployment target",
+                    "value": "Pi Zero 2",
+                    "detail": "The application was engineered for resource-constrained edge hardware while still supporting live AI-assisted workflows."
+                },
+                visualization={
+                    "title": "Edge AI application capabilities",
+                    "subtitle": "Illustrative progression from capture to live inference.",
+                    "x": ["Capture", "Sync", "Automation", "Live Inference"],
+                    "y_axis_label": "Capability Score",
+                    "series": [
+                        {"name": "System integration", "values": [2, 3, 4, 5]},
+                        {"name": "Operational utility", "values": [2, 3, 4, 5]}
+                    ]
+                },
                 date=(datetime.utcnow() - timedelta(days=45)).date()
             ),
         ]
@@ -66,79 +129,28 @@ def seed_database():
         print("\nSeeding BlogPost records...")
         blog_posts = [
             BlogPost(
-                title="Building High-Performance APIs with FastAPI",
-                content="""# Building High-Performance APIs with FastAPI
+                title="Designing APIs for Event-Driven Analytics",
+                content="""# Designing APIs for Event-Driven Analytics
 
-FastAPI is a modern web framework for building APIs with Python 3.6+.
-
-## Key Features
-- **Async/await support** for handling concurrent requests
-- **Automatic OpenAPI documentation** (Swagger UI)
-- **Type hints** for validation and IDE support
-- **Built-in security** utilities for authentication
-
-## Performance Tips
-1. Use async functions for I/O-bound operations
-2. Implement caching with Redis
-3. Profile with APScheduler for background tasks
-4. Deploy with Gunicorn + Uvicorn workers
-
-Typical throughput: 5K-10K requests/second on modest hardware.""",
+Turning noisy event streams into reusable analytics products requires clean contracts at the ingestion boundary, traceable transformations, and API endpoints that support both raw access and derived metrics.""",
                 publish_date=(datetime.utcnow() - timedelta(days=30)).date(),
-                tags=["FastAPI", "Python", "Web Development", "Performance"]
+                tags=["Data Engineering", "FastAPI", "Analytics"]
             ),
             BlogPost(
-                title="Data Visualization with D3.js and React",
-                content="""# Data Visualization with D3.js and React
+                title="Migrating Fragmented Legacy Data Without Losing Trust",
+                content="""# Migrating Fragmented Legacy Data Without Losing Trust
 
-Combining D3.js with React enables interactive, dynamic visualizations.
-
-## Integration Patterns
-- Use React for component lifecycle management
-- Delegate DOM manipulation to D3 within useEffect hooks
-- Maintain separation of concerns: React state, D3 rendering
-
-## Example: Time-Series Chart
-```javascript
-const TimeSeriesChart = ({ data }) => {
-  useEffect(() => {
-    const svg = d3.select(svgRef.current);
-    svg.selectAll('*').remove();
-    // D3 code here
-  }, [data]);
-  return <svg ref={svgRef} />;
-};
-```
-
-Performance scales to 10K+ data points with proper memoization.""",
+Legacy migrations usually fail when teams focus only on extraction. The real work is schema alignment, fuzzy matching, validation, and preserving enough provenance for downstream users to trust the output.""",
                 publish_date=(datetime.utcnow() - timedelta(days=20)).date(),
-                tags=["D3", "React", "Visualization", "JavaScript"]
+                tags=["ETL", "Data Quality", "SQL"]
             ),
             BlogPost(
-                title="Apache Kafka for Event-Driven Architectures",
-                content="""# Apache Kafka for Event-Driven Architectures
+                title="What Makes an AI Application Useful Beyond the Model",
+                content="""# What Makes an AI Application Useful Beyond the Model
 
-Kafka is a distributed event streaming platform designed for high-throughput, fault-tolerant data pipelines.
-
-## Core Concepts
-- **Topics**: Named event streams (e.g., "user-events", "transactions")
-- **Partitions**: Parallelism mechanism; enables horizontal scaling
-- **Consumer Groups**: Multiple consumers read from same topic independently
-
-## Use Cases
-1. Real-time analytics and dashboards
-2. Log aggregation across microservices
-3. Event sourcing patterns
-4. Stream processing (Kafka Streams, Spark)
-
-## Best Practices
-- Set replication factor ≥ 2 for fault tolerance
-- Monitor consumer lag to detect processing delays
-- Use schema registry for data governance
-
-Kafka can handle millions of events/second reliably.""",
+Applied AI systems succeed when inference is only one part of the product. Capture workflows, edge constraints, automation, validation, and operator feedback loops are what make the model usable in practice.""",
                 publish_date=(datetime.utcnow() - timedelta(days=10)).date(),
-                tags=["Kafka", "Data Engineering", "Streaming", "Architecture"]
+                tags=["AI Applications", "Machine Learning", "Computer Vision"]
             ),
         ]
         for bp in blog_posts:
@@ -177,15 +189,18 @@ Kafka can handle millions of events/second reliably.""",
         session.commit()
         print(f"✓ Inserted {len(metrics)} Metric records")
 
-        # Seed GraphNode records (tech stack)
+        # Seed GraphNode records (data science & ML tech stack)
         print("\nSeeding GraphNode records...")
         nodes = [
-            GraphNode(label="FastAPI", group="backend", weight=1.0),
-            GraphNode(label="PostgreSQL", group="backend", weight=1.0),
-            GraphNode(label="Redis", group="backend", weight=0.8),
-            GraphNode(label="Kafka", group="data", weight=0.9),
-            GraphNode(label="React", group="frontend", weight=1.0),
-            GraphNode(label="D3", group="frontend", weight=0.7),
+            GraphNode(label="Python", group="language", weight=1.0),
+            GraphNode(label="R", group="language", weight=0.8),
+            GraphNode(label="PyTorch", group="ml_ai", weight=0.9),
+            GraphNode(label="DeepLabCut", group="ml_ai", weight=1.0),
+            GraphNode(label="SLEAP", group="ml_ai", weight=0.9),
+            GraphNode(label="YOLO", group="ml_ai", weight=0.9),
+            GraphNode(label="NumPy / SciPy", group="analytics", weight=0.9),
+            GraphNode(label="SQL", group="database", weight=0.8),
+            GraphNode(label="TIBCO Spotfire", group="visualization", weight=0.7),
         ]
         for node in nodes:
             session.add(node)
@@ -197,12 +212,19 @@ Kafka can handle millions of events/second reliably.""",
         node_map = {node.label: node.id for node in session.query(GraphNode).all()}
 
         edges = [
-            GraphEdge(source_id=node_map["React"], target_id=node_map["FastAPI"], weight=1.0),
-            GraphEdge(source_id=node_map["FastAPI"], target_id=node_map["PostgreSQL"], weight=1.0),
-            GraphEdge(source_id=node_map["FastAPI"], target_id=node_map["Redis"], weight=0.8),
-            GraphEdge(source_id=node_map["Kafka"], target_id=node_map["PostgreSQL"], weight=0.9),
-            GraphEdge(source_id=node_map["Kafka"], target_id=node_map["FastAPI"], weight=0.7),
-            GraphEdge(source_id=node_map["React"], target_id=node_map["D3"], weight=1.0),
+            GraphEdge(source_id=node_map["Python"], target_id=node_map["PyTorch"], weight=1.0),
+            GraphEdge(source_id=node_map["Python"], target_id=node_map["DeepLabCut"], weight=1.0),
+            GraphEdge(source_id=node_map["Python"], target_id=node_map["SLEAP"], weight=0.9),
+            GraphEdge(source_id=node_map["Python"], target_id=node_map["YOLO"], weight=0.9),
+            GraphEdge(source_id=node_map["Python"], target_id=node_map["NumPy / SciPy"], weight=1.0),
+            GraphEdge(source_id=node_map["PyTorch"], target_id=node_map["DeepLabCut"], weight=0.8),
+            GraphEdge(source_id=node_map["PyTorch"], target_id=node_map["SLEAP"], weight=0.8),
+            GraphEdge(source_id=node_map["PyTorch"], target_id=node_map["YOLO"], weight=0.8),
+            GraphEdge(source_id=node_map["R"], target_id=node_map["NumPy / SciPy"], weight=0.6),
+            GraphEdge(source_id=node_map["R"], target_id=node_map["TIBCO Spotfire"], weight=0.7),
+            GraphEdge(source_id=node_map["SQL"], target_id=node_map["Python"], weight=0.7),
+            GraphEdge(source_id=node_map["SQL"], target_id=node_map["R"], weight=0.7),
+            GraphEdge(source_id=node_map["SQL"], target_id=node_map["TIBCO Spotfire"], weight=0.8),
         ]
         for edge in edges:
             session.add(edge)
