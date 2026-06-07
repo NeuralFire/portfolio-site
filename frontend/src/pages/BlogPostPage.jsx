@@ -1,8 +1,14 @@
-import { Children, isValidElement, useCallback } from 'react'
+import { Children, isValidElement, useCallback, useState } from 'react'
 import rehypeKatex from 'rehype-katex'
 import rehypeSanitize, { defaultSchema } from 'rehype-sanitize'
 import ReactMarkdown from 'react-markdown'
 import remarkMath from 'remark-math'
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import { Link, useParams } from 'react-router-dom'
+
+import { useApi } from '../hooks/useApi.js'
+import CaseStudyPlot from '../components/CaseStudyPlot.jsx'
 
 const sanitizeSchema = {
   ...defaultSchema,
@@ -23,8 +29,6 @@ const sanitizeSchema = {
     'mover', 'munder', 'munderover', 'annotation',
   ],
 }
-import { Link, useParams } from 'react-router-dom'
-import { useApi } from '../hooks/useApi.js'
 
 function BlogPostPage() {
   const { postId } = useParams()
@@ -72,7 +76,11 @@ function BlogPostPage() {
               <ReactMarkdown
                 remarkPlugins={[remarkMath]}
                 rehypePlugins={[rehypeKatex, [rehypeSanitize, sanitizeSchema]]}
-                components={{ pre: MarkdownPre }}
+                components={{
+                  pre: MarkdownPre,
+                  code: MarkdownCode,
+                  img: MarkdownImg,
+                }}
               >
                 {post.content}
               </ReactMarkdown>
@@ -102,8 +110,91 @@ function formatDate(value) {
   }).format(new Date(value))
 }
 
+function CopyButton({ text }) {
+  const [copied, setCopied] = useState(false)
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(text)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch (err) {
+      console.error('Failed to copy code: ', err)
+    }
+  }
+
+  return (
+    <button
+      className={`code-copy-button ${copied ? 'copied' : ''}`}
+      onClick={handleCopy}
+      type="button"
+    >
+      {copied ? 'Copied!' : 'Copy'}
+    </button>
+  )
+}
+
+function MarkdownCode({ className, children, ...props }) {
+  const match = /language-(\w+)/.exec(className || '')
+  const language = match ? match[1] : ''
+  const codeContent = String(children).replace(/\n$/, '')
+
+  if (language === 'plotly') {
+    let visualization = null
+    let parseError = null
+
+    try {
+      visualization = JSON.parse(codeContent)
+    } catch (err) {
+      parseError = err.message
+    }
+
+    if (parseError) {
+      return (
+        <div className="plotly-parse-error">
+          <strong>Failed to parse Plotly JSON:</strong> {parseError}
+          <pre>{codeContent}</pre>
+        </div>
+      )
+    }
+
+    return <CaseStudyPlot visualization={visualization} />
+  }
+
+  const isBlock = className && className.startsWith('language-')
+
+  if (isBlock) {
+    return (
+      <div className="syntax-highlight-wrap">
+        <CopyButton text={codeContent} />
+        <SyntaxHighlighter
+          style={vscDarkPlus}
+          language={language}
+          PreTag="div"
+          {...props}
+        >
+          {codeContent}
+        </SyntaxHighlighter>
+      </div>
+    )
+  }
+
+  return (
+    <code className={className} {...props}>
+      {children}
+    </code>
+  )
+}
+
 function MarkdownPre({ children, ...props }) {
   const child = Children.toArray(children)[0]
+  if (child && isValidElement(child) && child.type === 'code') {
+    const className = child.props.className || ''
+    if (className.includes('language-plotly')) {
+      return child
+    }
+  }
+
   const language = getCodeLanguage(child)
 
   return (
@@ -111,6 +202,15 @@ function MarkdownPre({ children, ...props }) {
       <span className="markdown-code-language">{language}</span>
       <pre {...props}>{children}</pre>
     </div>
+  )
+}
+
+function MarkdownImg({ src, alt, title, ...props }) {
+  return (
+    <figure className="markdown-figure">
+      <img src={src} alt={alt || title || ''} {...props} />
+      {(alt || title) ? <figcaption>{alt || title}</figcaption> : null}
+    </figure>
   )
 }
 
@@ -132,4 +232,5 @@ function calculateReadingTime(content) {
   return `${minutes} min read`
 }
 
-export default BlogPostPage
+export default BlogPostPage
+

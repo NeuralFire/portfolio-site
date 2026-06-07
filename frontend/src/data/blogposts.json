@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "title": "Designing APIs for Event-Driven Analytics",
+    "content": "# Designing APIs for Event-Driven Analytics\n\nTurning noisy event streams into reusable analytics products requires clean contracts at the ingestion boundary, traceable transformations, and API endpoints that support both raw access and derived metrics.\n\n### Code Demonstration\n\nHere is an example of an ingestion handler in FastAPI:\n\n```python\nfrom fastapi import FastAPI, HTTPException\nfrom pydantic import BaseModel\nfrom datetime import datetime\n\napp = FastAPI()\n\nclass AnalyticsEvent(BaseModel):\n    event_type: str\n    user_id: str\n    timestamp: datetime\n    payload: dict\n\n@app.post(\"/api/v1/ingest\")\nasync def ingest_event(event: AnalyticsEvent):\n    try:\n        # Process event, write to timescaledb or postgres\n        return {\"status\": \"success\", \"event_id\": \"evt_123\"}\n    except Exception as e:\n        raise HTTPException(status_code=500, detail=str(e))\n```\n\n### Mathematical Formulation\n\nThroughput metrics are calculated by taking the sum of processed events over a sliding time window $W$:\n\n$$T = \\frac{\\sum_{i=1}^{N} E_i}{\\Delta t}$$\n\nWhere $E_i$ represents each event count, and $\\Delta t$ is the duration of window $W$.\n\n![Figure 1: High-Throughput Ingestion Architecture](https://raw.githubusercontent.com/dpalmer9/portfolio-site/static/architecture-placeholder.png)",
+    "publish_date": "2026-05-07",
+    "tags": ["Data Engineering", "FastAPI", "Analytics"]
+  },
+  {
+    "id": 2,
+    "title": "Migrating Fragmented Legacy Data Without Losing Trust",
+    "content": "# Migrating Fragmented Legacy Data Without Losing Trust\n\nLegacy migrations usually fail when teams focus only on extraction. The real work is schema alignment, fuzzy matching, validation, and preserving enough provenance for downstream users to trust the output.\n\n### Matching Logic\n\nFor key entities with misspelled entries, we apply fuzzy string matching algorithms like Levenshtein distance to align spelling variations before database insertion:\n\n```python\nfrom difflib import SequenceMatcher\n\ndef fuzzy_similarity(a: str, b: str) -> float:\n    return SequenceMatcher(None, a, b).ratio()\n\n# Match rate threshold\nsimilarity = fuzzy_similarity(\"DeepLabCut v2\", \"DeepLabCut Version 2\")\nprint(f\"Similarity score: {similarity:.2f}\") # Outputs 0.81\n```",
+    "publish_date": "2026-05-17",
+    "tags": ["ETL", "Data Quality", "SQL"]
+  },
+  {
+    "id": 3,
+    "title": "What Makes an AI Application Useful Beyond the Model",
+    "content": "# What Makes an AI Application Useful Beyond the Model\n\nApplied AI systems succeed when inference is only one part of the product. Capture workflows, edge constraints, automation, validation, and operator feedback loops are what make the model usable in practice.\n\n```rust\nfn main() {\n    println!(\"Deploying YOLO model on Pi Zero 2...\\nInitializing camera capture...\");\n}\n```",
+    "publish_date": "2026-05-27",
+    "tags": ["AI Applications", "Machine Learning", "Computer Vision"]
+  }
+]

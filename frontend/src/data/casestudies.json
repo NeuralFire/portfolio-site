@@ -1,0 +1,95 @@
+[
+  {
+    "id": 1,
+    "title": "MouseBytes v2 Analytics Platform",
+    "summary": "Architected a next-generation time series processing platform with React, FastAPI, and PostgreSQL to support on-demand metrics and flexible metadata.",
+    "problem_statement": "Large, high-dimensional time series datasets were difficult to reuse because analysis logic and metadata structures were too rigid for evolving research and reporting needs.",
+    "architecture": "React frontend → FastAPI service layer → PostgreSQL storage → on-demand metric generation and flexible metadata handling.",
+    "impact": "Created a stronger foundation for reusable analytics workflows, richer metadata, and faster access to derived metrics across complex datasets.",
+    "tech_stack": ["React", "FastAPI", "Python", "PostgreSQL", "SQL"],
+    "external_links": [
+      {
+        "label": "Portfolio Repository",
+        "url": "https://github.com"
+      }
+    ],
+    "impact_metric": {
+      "label": "Platform focus",
+      "value": "On-demand metrics",
+      "detail": "The platform was designed to support dynamic metric calculation and more flexible dataset reuse instead of fixed reporting outputs."
+    },
+    "visualization": {
+      "title": "Analytics platform maturity",
+      "subtitle": "Illustrative progression from raw ingestion to reusable metric delivery.",
+      "x": ["Raw Data", "Structured Storage", "Metadata Layer", "On-Demand Metrics"],
+      "y_axis_label": "Capability Score",
+      "series": [
+        {"name": "Data usability", "values": [1, 2, 4, 5]},
+        {"name": "Analytical flexibility", "values": [1, 2, 3, 5]}
+      ]
+    },
+    "date": "2026-02-06"
+  },
+  {
+    "id": 2,
+    "title": "Historical Scientific Data Migration",
+    "summary": "Engineered a Python ETL pipeline to migrate 15 years of historical data from hundreds of distributed Access databases into structured outputs.",
+    "problem_statement": "Legacy records were fragmented across many Access databases with inconsistent metadata, making migration and validation slow, manual, and error-prone.",
+    "architecture": "Distributed Access sources → Python ETL workflows → fuzzy matching and metadata alignment → validation outputs for downstream SQL migration.",
+    "impact": "Improved integrity and portability for long-lived datasets by automating extraction, alignment, and validation steps that would otherwise require significant manual review.",
+    "tech_stack": ["Python", "ETL", "SQL", "Data Validation", "Fuzzy Matching"],
+    "external_links": [
+      {
+        "label": "Portfolio Repository",
+        "url": "https://github.com"
+      }
+    ],
+    "impact_metric": {
+      "label": "Data horizon",
+      "value": "15 years",
+      "detail": "The migration covered long-lived historical records stored across hundreds of fragmented data sources."
+    },
+    "visualization": {
+      "title": "Migration pipeline stages",
+      "subtitle": "Illustrative workflow from fragmented legacy inputs to validated outputs.",
+      "x": ["Extract", "Normalize", "Fuzzy Match", "Validate"],
+      "y_axis_label": "Workflow Coverage",
+      "series": [
+        {"name": "Automation", "values": [2, 3, 4, 5]},
+        {"name": "Data confidence", "values": [1, 2, 4, 5]}
+      ]
+    },
+    "date": "2026-03-18"
+  },
+  {
+    "id": 3,
+    "title": "OpenBehaviourCamera Edge AI Application",
+    "summary": "Built Rust binaries and Python control software for Raspberry Pi Zero 2 devices that capture synchronized footage and support live YOLO inference.",
+    "problem_statement": "The system needed lightweight edge capture, synchronized hardware-state logging, and practical AI-assisted tracking on constrained hardware.",
+    "architecture": "Rust capture binaries on Raspberry Pi Zero 2 → Python orchestration and recording workflows → live YOLO inference for behavioral tracking.",
+    "impact": "Combined edge systems work and applied computer vision into a deployable AI application that supports automation, recording, and live analysis.",
+    "tech_stack": ["Rust", "Python", "YOLO", "Raspberry Pi", "Computer Vision"],
+    "external_links": [
+      {
+        "label": "Portfolio Repository",
+        "url": "https://github.com"
+      }
+    ],
+    "impact_metric": {
+      "label": "Deployment target",
+      "value": "Pi Zero 2",
+      "detail": "The application was engineered for resource-constrained edge hardware while still supporting live AI-assisted workflows."
+    },
+    "visualization": {
+      "title": "Edge AI application capabilities",
+      "subtitle": "Illustrative progression from capture to live inference.",
+      "x": ["Capture", "Sync", "Automation", "Live Inference"],
+      "y_axis_label": "Capability Score",
+      "series": [
+        {"name": "System integration", "values": [2, 3, 4, 5]},
+        {"name": "Operational utility", "values": [2, 3, 4, 5]}
+      ]
+    },
+    "date": "2026-04-22"
+  }
+]

@@ -120,7 +120,7 @@ function ResumePage() {
   const categoryKeys = Object.keys(resumeCategories)
 
   const handleKeyDown = (event, index) => {
-    let nextIndex = index
+    let nextIndex
     if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
       event.preventDefault()
       nextIndex = (index + 1) % categoryKeys.length
@@ -138,6 +138,7 @@ function ResumePage() {
     const buttons = event.currentTarget.parentElement.querySelectorAll('[role="tab"]')
     buttons[nextIndex]?.focus()
   }
+
 
   return (
     <div className="page-stack">
